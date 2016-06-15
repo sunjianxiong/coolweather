@@ -1,15 +1,15 @@
-package db;
-
+package com.coolweather.app.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.City;
-import model.County;
-import model.Province;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.coolweather.app.model.City;
+import com.coolweather.app.model.County;
+import com.coolweather.app.model.Province;
 
 public class CoolWeatherDB {
 
@@ -36,7 +36,7 @@ public class CoolWeatherDB {
 	 * 获取CoolWeatherDB的实例
 	 */
 	public synchronized static CoolWeatherDB getInstance(Context context) {
-		if (coolWeatherDB != null) {
+		if (coolWeatherDB == null) {
 			coolWeatherDB = new CoolWeatherDB(context);
 		}
 		return coolWeatherDB;
@@ -48,7 +48,7 @@ public class CoolWeatherDB {
 	public void saveProvince(Province province) {
 		if (province != null) {
 			ContentValues values = new ContentValues();
-			values.put("privince_name", province.getProvinceName());
+			values.put("province_name", province.getProvinceName());
 			values.put("province_code", province.getProvinceCode());
 			db.insert("Province", null, values);
 		}
